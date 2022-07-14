@@ -4,6 +4,7 @@ from utils import *
 from visualisation import *
 from mass_prediction import *
 from stata import *
+from logger import *
 
 from random import choice
 
@@ -47,6 +48,7 @@ def collect_train_situations_NO_RANGE(train_pics, z_rule, zz_rule):
     return binary_pics, points
 
 if __name__ == '__main__':
+    log = HtmlLogger("NAIVE_SELECTION_MASS_PRED")
     train_pics, test_pics, contrast = get_train_test_contrast_BIN(class_num=45) #F=45, две закорюки и точка = 56, самый простой значок = 9, 29 и 32
     etalon_pic = choice(train_pics)
 
@@ -56,7 +58,7 @@ if __name__ == '__main__':
 
     zz_e1 = get_strongest_example(zz_examples)
     #  выбор предсказаний относительно zz_e1
-    m_pred = MassPrediction(u=Point(x=10, y=10),
+    m_pred = MassPrediction(u=Point(x=-10, y=10),
                             top_left_coord=Point(x=3, y=3),
                             bottow_right_coord=Point(x=-5, y=-3))
 
@@ -64,8 +66,9 @@ if __name__ == '__main__':
     sample_zz = m_pred.sample_by_situation_generator(situation_pics, situation_points)
     sample_ = m_pred.sample_from_generlal_population(train_pics)
     p_val = get_p_value_for_two_samples(sample_, sample_zz)
+    visualise_mass_pred(etalon_pic, zz_e1, m_pred, sample_zz, sample_, log, p_val)
     print(p_val)
-
+    log.close()
 
 
 

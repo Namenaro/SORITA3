@@ -24,6 +24,8 @@ def try_grow_seq_of_points_unknown_u(start_point, binary_img, max_rad):
     if sense_1(start_point, binary_img) is False:
         return []
     second_p = find_nearest_1(start_point, binary_img, max_rad)
+    if second_p is None:
+        return []
     u = Point(second_p.x - start_point.x, second_p.y - start_point.y)
     return try_qrow_seq_of_points_with_u(start_point, binary_img, u, max_rad)
 

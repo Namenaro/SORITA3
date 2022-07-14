@@ -1,4 +1,5 @@
 from z_example import *
+from logger import *
 
 import matplotlib.pyplot as plt
 
@@ -18,3 +19,9 @@ def visuailise_examples_in_pic(pic, zz_examples):
         for i in range(1, len(example.points)):
             plt.scatter(example.points[i].x, example.points[i].y, s=100, c='green', marker='o', alpha=0.4)
     plt.show()
+
+
+def visualise_mass_pred(etalon_pic, zz_e1, m_pred, sample_zz, sample_, log, p_val):
+    log.add_text("p_val="+str(p_val))
+    log.add_text("sample_=" + str(sample_))
+    log.add_text("sample_zz=" + str(sample_zz))
