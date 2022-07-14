@@ -27,6 +27,16 @@ def get_backward_dir(dir):
         bdir.y=-dir.y
     return bdir
 
+def get_train_test_contrast_BIN(class_num):
+    train_pics, test_pics, contrast = get_train_test_contrast(class_num)
+    for i in range(len(train_pics)):
+        train_pics[i]=binarise_img(train_pics[i])
+    for i in range(len(test_pics)):
+        test_pics[i]=binarise_img(test_pics[i])
+    for i in range(len(contrast)):
+        contrast[i]=binarise_img(contrast[i])
+    return train_pics, test_pics, contrast
+
 
 def get_train_test_contrast(class_num):
     ominset = datasets.Omniglot(root='./data_om', download=True, transform=None)
