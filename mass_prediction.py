@@ -8,16 +8,16 @@ class MassPrediction:
         self.bottow_right_coord=bottow_right_coord
 
     def run(self, start, binary_img):
-        abs_center = Point(x=start.x+self.u.x, y=start.y+self.u.y)
-        min_x = self.top_left_coord.x
-        max_x = self.bottow_right_coord.x
-        min_y = self.top_left_coord.y
-        max_y = self.bottow_right_coord.y
+        coord_center_x = start.x + self.u.x
+        coord_center_y = start.y - self.u.y
+        x_min = coord_center_x + self.top_left_coord.x
+        y_min = coord_center_y - self.top_left_coord.y
+        w, h = self.get_w_h()
 
         mass = 0
-        for local_x in range(min_x, max_x):
-            for local_y in range(min_y, max_y):
-                abs_point = Point(x=abs_center.x+local_x, y=abs_center.y+local_y)
+        for dx in range(w):
+            for dy in range(h):
+                abs_point = Point(x=x_min+dx, y=y_min+dy)
                 mass += sense_1(abs_point, binary_img)
         return mass
 
@@ -40,13 +40,8 @@ class MassPrediction:
         return sample
 
     def get_w_h(self):
-        min_x = self.top_left_coord.x
-        max_x = self.bottow_right_coord.x
-        min_y = self.top_left_coord.y
-        max_y = self.bottow_right_coord.y
-
-        w = max_x-min_x
-        h = max_y-min_y
+        w = self.bottow_right_coord.x- self.top_left_coord.x
+        h = self.top_left_coord.y - self.bottow_right_coord.y
         return w,h
 
 

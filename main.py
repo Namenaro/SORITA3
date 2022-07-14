@@ -58,9 +58,9 @@ if __name__ == '__main__':
 
     zz_e1 = get_strongest_example(zz_examples)
     #  выбор предсказаний относительно zz_e1
-    m_pred = MassPrediction(u=Point(x=-10, y=10),
-                            top_left_coord=Point(x=3, y=3),
-                            bottow_right_coord=Point(x=-5, y=-3))
+    m_pred = MassPrediction(u=Point(x=-6, y=-6),
+                            top_left_coord=Point(x=-5, y=5),
+                            bottow_right_coord=Point(x=5, y=-5))
 
     situation_pics, situation_points = collect_train_situations_NO_RANGE(train_pics, z_rule, zz_rule)
     sample_zz = m_pred.sample_by_situation_generator(situation_pics, situation_points)

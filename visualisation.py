@@ -28,12 +28,14 @@ def visualise_mass_pred(etalon_pic, zz_e1, m_pred, sample_zz, sample_, log, p_va
     log.add_text("sample_zz=" + str(sample_zz))
     fig, ax = plt.subplots()
     ax.imshow(etalon_pic, cmap='gray_r', )
-    coord_center_x=zz_e1.get_z_point().x
-    coord_center_y=zz_e1.get_z_point().y
-    ax.plot(coord_center_x, coord_center_y , marker='o', markerfacecolor='blue', color='skyblue', linewidth=4)
-    x=m_pred.top_left_coord.x+ coord_center_x
-    y=m_pred.top_left_coord.y +coord_center_y
+
+    ax.plot(zz_e1.get_z_point().x, zz_e1.get_z_point().y , marker='o', markerfacecolor='blue', color='skyblue', linewidth=4)
+
+    coord_center_x = zz_e1.get_z_point().x + m_pred.u.x
+    coord_center_y = zz_e1.get_z_point().y - m_pred.u.y
+    x_min = coord_center_x + m_pred.top_left_coord.x
+    y_min = coord_center_y - m_pred.top_left_coord.y
     w,h = m_pred.get_w_h()
-    rect = Rectangle((x, y), w, h, linewidth=1, edgecolor='r', facecolor='none')
+    rect = Rectangle((x_min, y_min), w, h, linewidth=1, edgecolor='r', facecolor='none')
     ax.add_patch(rect)
     log.add_fig(fig)
