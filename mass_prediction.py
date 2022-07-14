@@ -39,5 +39,17 @@ class MassPrediction:
             sample.append(self.run(point, pic))
         return sample
 
+    def get_w_h(self):
+        min_x = self.top_left_coord.x
+        max_x = self.bottow_right_coord.x
+        min_y = self.top_left_coord.y
+        max_y = self.bottow_right_coord.y
+
+        w = max_x-min_x
+        h = max_y-min_y
+        return w,h
+
+
+
 
 

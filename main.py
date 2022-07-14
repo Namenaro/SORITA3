@@ -33,7 +33,7 @@ def get_strongest_example(zz_examples):
         if curr_len>best_len:
             best_len = curr_len
             index = i
-    return index
+    return zz_examples[index]
 
 def collect_train_situations_NO_RANGE(train_pics, z_rule, zz_rule):
     binary_pics = []

@@ -1,6 +1,7 @@
 from z_example import *
 from logger import *
 
+from matplotlib.patches import Rectangle
 import matplotlib.pyplot as plt
 
 def show_binary_pic(binary_pic):
@@ -25,3 +26,14 @@ def visualise_mass_pred(etalon_pic, zz_e1, m_pred, sample_zz, sample_, log, p_va
     log.add_text("p_val="+str(p_val))
     log.add_text("sample_=" + str(sample_))
     log.add_text("sample_zz=" + str(sample_zz))
+    fig, ax = plt.subplots()
+    ax.imshow(etalon_pic, cmap='gray_r', )
+    coord_center_x=zz_e1.get_z_point().x
+    coord_center_y=zz_e1.get_z_point().y
+    ax.plot(coord_center_x, coord_center_y , marker='o', markerfacecolor='blue', color='skyblue', linewidth=4)
+    x=m_pred.top_left_coord.x+ coord_center_x
+    y=m_pred.top_left_coord.y +coord_center_y
+    w,h = m_pred.get_w_h()
+    rect = Rectangle((x, y), w, h, linewidth=1, edgecolor='r', facecolor='none')
+    ax.add_patch(rect)
+    log.add_fig(fig)
